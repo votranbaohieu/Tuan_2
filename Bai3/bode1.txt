@@ -1,0 +1,19 @@
+3
+1. con gi cao nhat ?
+a. con heo
+b. huu cao co
+c. su tu
+d. ngua van
+b
+2. com gi nang nhat ?
+a. con voi
+b. con khi
+c. con ngua
+d. con ga
+a
+3. ai cao nhat?
+a. Luu Van Non
+b. Phan Thanh Dat
+c. Le Tuan Tai
+d. Ho Ngoc Chung
+c
