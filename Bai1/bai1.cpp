@@ -1,18 +1,67 @@
 #include<iostream>
-#include<conio.h>
+#include<stdio.h>
+
 using namespace std;
+
 char Matrix[5][5] = { ' ','|',' ','|',' ','-','-','-','-','-',' ','|',' ','|',' ','-','-','-','-','-',' ','|',' ','|',' ' };
-int idplayer = 1;
+int NguoiChoi = 1;
 char Mark;
-char key;
+int Nuoc;
 bool invalidmove;
-int nextmove;
 bool Gameover;
 bool Gamewin;
-// hien thi ra mang 2 chieu 3x3
-void Bang()
+char key;
+// cac ham trong bai
+void Bang();
+void PlayerMark();
+void Swichtturn();
+void Input();
+void Wincheck();
+// ham chinh
+int main()
 {
-	system("cls");
+	do
+	{
+		Bang();
+		PlayerMark();
+		Input();
+		Wincheck();
+		if (Gameover)
+		{
+			if (Gamewin)
+			{
+				cout << "Nguoi choi " << NguoiChoi << "danh chien thang!" << endl;
+			}
+			cout << "Choi lai:(y/n)";
+			cin >> key;
+			if (key == 'n')
+			{
+				break;
+			}
+			if (key == 'y')
+			{
+				Gameover = false;
+				Matrix[0][0] = ' ';
+				Matrix[0][2] = ' ';
+				Matrix[0][4] = ' ';
+				Matrix[2][0] = ' ';
+				Matrix[2][2] = ' ';
+				Matrix[2][4] = ' ';
+				Matrix[4][0] = ' ';
+				Matrix[4][2] = ' ';
+				Matrix[4][4] = ' ';
+
+			}
+			NguoiChoi = 1;
+		}
+		else
+			Swichtturn();
+	} while (!Gameover);
+	system("pause");
+}
+// tao khung nhin tren man hinh
+void Bang(){
+		system("cls");
 	cout << "nguoi choi so 1:X" << endl;
 	cout << "nguoi choi so 2:O" << endl;
 	for (int i = 0; i < 5; i++)
@@ -24,57 +73,57 @@ void Bang()
 		cout << endl;
 	}
 }
-// nguoi choi di truoc chon x
+// neu nguoi cho 1 ki hieu X, nguoi choi 2 ki hieu O
 void PlayerMark()
 {
-	if (idplayer == 1)
+	if (NguoiChoi == 1)
 		Mark = 'X';
 	else
 		Mark = 'O';
 }
-
+// thay doi nguoi choi
 void Swichtturn()
 {
-	if (idplayer == 1)
-		idplayer = 2;
+	if (NguoiChoi == 1)
+		NguoiChoi = 2;
 	else
-		idplayer = 1;
+		NguoiChoi = 1;
 }
-// nhap nuoc di cua ban
+// nhap nuoc di vao ban 
 void Input()
 {
-	cout << "Nguoi choi " << idplayer << " nhap nuoc di: ";
-	cin >> nextmove;
+	cout << "Nguoi choi " << NguoiChoi << " nhap nuoc di: ";
+	cin >> Nuoc;
 	do
 	{
 		invalidmove = true;
-		if (nextmove == 1 && Matrix[0][0] == ' ')
+		if (Nuoc == 1 && Matrix[0][0] == ' ')
 			Matrix[0][0] = Mark;
-		else if (nextmove == 2 && Matrix[0][2] == ' ')
+		else if (Nuoc == 2 && Matrix[0][2] == ' ')
 			Matrix[0][2] = Mark;
-		else if (nextmove == 3 && Matrix[0][4] == ' ')
+		else if (Nuoc == 3 && Matrix[0][4] == ' ')
 			Matrix[0][4] = Mark;
-		else if (nextmove == 4 && Matrix[2][0] == ' ')
+		else if (Nuoc == 4 && Matrix[2][0] == ' ')
 			Matrix[2][0] = Mark;
-		else if (nextmove == 5 && Matrix[2][2] == ' ')
+		else if (Nuoc == 5 && Matrix[2][2] == ' ')
 			Matrix[2][2] = Mark;
-		else if (nextmove == 6 && Matrix[2][4] == ' ')
+		else if (Nuoc == 6 && Matrix[2][4] == ' ')
 			Matrix[2][4] = Mark;
-		else if (nextmove == 7 && Matrix[4][0] == ' ')
+		else if (Nuoc == 7 && Matrix[4][0] == ' ')
 			Matrix[4][0] = Mark;
-		else if (nextmove == 8 && Matrix[4][2] == ' ')
+		else if (Nuoc == 8 && Matrix[4][2] == ' ')
 			Matrix[4][2] = Mark;
-		else if (nextmove == 9 && Matrix[4][4] == ' ')
+		else if (Nuoc == 9 && Matrix[4][4] == ' ')
 			Matrix[4][4] = Mark;
 		else
 		{
 			cout << "Nuoc di khong dung, vui long nhap lai: ";
 			invalidmove = false;
-			cin >> nextmove;
+			cin >> Nuoc;
 		}
 	} while (!invalidmove);
 }
-// kiem tra nguoi chien thang
+// kiem tra dieu kien chien thang
 void Wincheck()
 {
 	Gameover = false;
@@ -120,44 +169,7 @@ void Wincheck()
 		cout << "Tro choi Hoa, 2 nguoi bang diem." << endl;
 	}
 }
-int main()
-{
-	do
-	{
-		Bang();
-		PlayerMark();
-		Input();
-		Wincheck();
-		if (Gameover)
-		{
-			if (Gamewin)
-			{
-				cout << "Nguoi choi " << idplayer << "danh chien thang!" << endl;
-			}
-			cout << "Choi lai:(y/n)";
-			cin >> key;
-			if (key == 'n')
-			{
-				break;
-			}
-			if (key == 'y')
-			{
-				Gameover = false;
-				Matrix[0][0] = ' ';
-				Matrix[0][2] = ' ';
-				Matrix[0][4] = ' ';
-				Matrix[2][0] = ' ';
-				Matrix[2][2] = ' ';
-				Matrix[2][4] = ' ';
-				Matrix[4][0] = ' ';
-				Matrix[4][2] = ' ';
-				Matrix[4][4] = ' ';
 
-			}
-			idplayer = 1;
-		}
-		else
-			Swichtturn();
-	} while (!Gameover);
-	system("pause");
-}
+
+
+
